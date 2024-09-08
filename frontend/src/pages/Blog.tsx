@@ -1,14 +1,19 @@
 import { useParams } from "react-router-dom";
+import FullBlog from "../component/FullBlog";
 import { useBlog } from "../hooks";
 
-function Blog() {
+export default function BlogPage() {
   const { id } = useParams();
-  const { loading, blog } = useBlog({ id: id || "" });
+  const { loading, blog }: any = useBlog({
+    id: id || "",
+  });
 
   if (loading) {
     return <div>loading......</div>;
   }
-  return <div></div>;
+  return (
+    <div>
+      <FullBlog blog={blog} />
+    </div>
+  );
 }
-
-export default Blog;
