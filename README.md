@@ -21,32 +21,58 @@ The project is divided into three main folders:
 ## Technologies Used
 
 ### Backend
+
 - Hono: Lightweight web framework
 - Prisma: Database ORM
 - Cloudflare Workers: Serverless deployment environment
 
 ### Frontend
+
 - React Router: For client-side routing
 - Tailwind CSS: For styling
 
 ### Common
+
 - Zod: For data validation
 - TypeScript: For type definitions
 
 ## Installation
 
 1. Clone the repository:
+
    ```
    git clone https://github.com/awaiskhan21/medium-blog/
    ```
 
 2. Install dependencies:
+
    ```
    cd [project-folder]
    npm install
    ```
 
-3. Set up environment variables (provide instructions if needed)
+3. Set up environment variables and configuration files:
+
+   a. Backend:
+
+   - Create a `.env` file in the `backend` folder
+   - Add the database URL:
+     ```
+     DATABASE_URL="your_database_url_here"
+     ```
+   - In `wrangler.toml`, add the Prisma Accelerate URL:
+     ```
+     [vars]
+     DATABASE_URL="your_prisma_accelerate_url_here"
+     JWT_SECRET="your_jwt_secret"
+     ```
+
+   b. Frontend:
+
+   - In the `frontend/src/config.ts` file, add the deployed Cloudflare Worker URL:
+     ```typescript
+     export const BACKEND_URL = "your_cloudflare_worker_url_here";
+     ```
 
 4. Set up the database with Prisma:
    ```
@@ -79,4 +105,3 @@ The project is divided into three main folders:
 - `/blog/:id`: Get a specific blog post
 - `/blogs`: Get all blog posts
 - `/publish`: Create a new blog post
-
