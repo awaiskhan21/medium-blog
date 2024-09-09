@@ -1,12 +1,29 @@
 import Appbar from "../component/Appbar";
 import BlogCard from "../component/BlogCard";
+import { BlogSkeleton } from "../component/BlogSkeleton";
 import { useBlogs } from "../hooks";
 
 function Blogs() {
   const { loading, blogs } = useBlogs();
 
   if (loading) {
-    return <div>loading......</div>;
+    return (
+      <div>
+        <Appbar />
+        <div className="flex justify-center">
+          <div className="flex flex-col justify-center">
+            <BlogSkeleton />
+            <BlogSkeleton />
+            <BlogSkeleton />
+            <BlogSkeleton />
+            <BlogSkeleton />
+            <BlogSkeleton />
+            <BlogSkeleton />
+            <BlogSkeleton />
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
     <div>
@@ -20,13 +37,26 @@ function Blogs() {
               authorName={blog.author.name || "Anonymous"}
               title={blog.title}
               content={blog.content}
-              publishedDate={"6th aug 20204"}
+              publishedDate={formatDate(blog.createdAt)}
             />
           ))}
         </div>
       </div>
     </div>
   );
+}
+
+function formatDate(dateString: string) {
+  const date = new Date(dateString);
+
+  // Options for date formatting
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+
+  return date.toLocaleDateString("en-US", options);
 }
 
 export default Blogs;

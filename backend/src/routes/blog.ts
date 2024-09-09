@@ -91,22 +91,32 @@ blog.get("/bulk", async (c) => {
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL, // this url is comming from wrangler.toml not .env
   }).$extends(withAccelerate());
-  const blogs = await prisma.post.findMany({
-    select: {
-      content: true,
-      title: true,
-      id: true,
-      author: {
-        select: {
-          name: true,
+  try {
+    const blogs = await prisma.post.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      select: {
+        content: true,
+        title: true,
+        id: true,
+        createdAt: true,
+        author: {
+          select: {
+            name: true,
+          },
         },
       },
-    },
-  });
-  console.log("blogs" + blogs);
-  return c.json({
-    blogs: blogs,
-  });
+    });
+    console.log("blogs" + blogs);
+    return c.json({
+      blogs: blogs,
+    });
+  } catch (e) {
+    return c.json({
+      error: e,
+    });
+  }
 });
 
 blog.get("/:id", async (c) => {

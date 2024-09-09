@@ -10,17 +10,27 @@ function Auth({ type }: { type: "signup" | "signin" }) {
     password: "",
     name: "",
   });
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   async function sendRequest() {
     try {
+      setLoading(true);
       const response = await axios.post(
         `${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`,
         postInputs
       );
-      const token = response.data.jwt;
-      localStorage.setItem("token", token);
-      navigate("/blogs");
-    } catch (e) {}
+      const jwt = response.data.jwt;
+      if (jwt) {
+        localStorage.setItem("token", jwt);
+        navigate("/blogs");
+      } else {
+        throw new Error("No token received");
+      }
+    } catch (e) {
+      console.error("Authentication error:", e);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -81,9 +91,16 @@ function Auth({ type }: { type: "signup" | "signin" }) {
             <button
               type="button"
               onClick={sendRequest}
-              className="w-full mt-8 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-bold rounded-lg text-lg px-5 py-2.5 me-2 mb-2 "
+              disabled={loading}
+              className={`w-full mt-8 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-bold rounded-lg text-lg px-5 py-2.5 me-2 mb-2 ${
+                loading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
             >
-              {type === "signup" ? "sign up" : "sign in"}
+              {loading
+                ? "Processing..."
+                : type === "signup"
+                ? "Sign Up"
+                : "Sign In"}
             </button>
           </div>
         </div>
