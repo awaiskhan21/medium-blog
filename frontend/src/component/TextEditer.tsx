@@ -1,3 +1,4 @@
+import { Editor } from "novel";
 import { ChangeEvent } from "react";
 
 export default function TextEditor({
@@ -7,19 +8,18 @@ export default function TextEditor({
 }) {
   return (
     <div className="mt-2">
-      <div className="w-full mb-4 ">
-        <div className="flex items-center justify-between border">
-          <div className="my-2 bg-white rounded-b-lg w-full">
-            <label className="sr-only">Publish post</label>
-            <textarea
-              onChange={onChange}
-              id="editor"
-              rows={8}
-              className="focus:outline-none block w-full px-0 text-sm text-gray-800 bg-white border-0 pl-2"
-              placeholder="Write an article..."
-              required
-            />
-          </div>
+      <div className="w-full  ">
+        <div className="flex items-center justify-between ">
+          <Editor
+            disableLocalStorage={true}
+            defaultValue={{
+              type: "doc",
+              content: [],
+            }}
+            onDebouncedUpdate={(editor?: any) => {
+              onChange(editor?.getHTML());
+            }}
+          />
         </div>
       </div>
     </div>

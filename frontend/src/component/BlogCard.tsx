@@ -25,7 +25,10 @@ function BlogCard({
           <div className="font-light text-slate-500">{publishedDate}</div>
         </div>
         <div className="text-xl font-semibold pt-2">{title}</div>
-        <div className="text-sm font-thin">{content.slice(0, 100) + "..."}</div>
+        <div
+          className="prose"
+          dangerouslySetInnerHTML={{ __html: getFirstNWords(content, 18) }}
+        ></div>
         <div className="text-slate-400 text-sm font-thin pt-4">{`${Math.ceil(
           content.length / 100
         )} min read`}</div>
@@ -34,4 +37,12 @@ function BlogCard({
   );
 }
 
+const getFirstNWords = (htmlContent: string, wordLimit: number) => {
+  const div = document.createElement("div");
+  div.innerHTML = htmlContent;
+  const textContent = div.innerText || div.textContent || "";
+
+  const words = textContent.split(/\s+/).slice(0, wordLimit).join(" ");
+  return words + "...";
+};
 export default BlogCard;

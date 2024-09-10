@@ -1,4 +1,5 @@
 import { Blog } from "../hooks";
+import { formatDate } from "../pages/Blogs";
 import Appbar from "./Appbar";
 import Avatar from "./Avatar";
 
@@ -11,9 +12,13 @@ export default function FullBlog({ blog }: { blog: Blog }) {
           <div className="col-span-8">
             <div className="text-5xl font-extrabold mb-4"> {blog.title}</div>
             <div className="text-slate-500 pt-2 mb-6">
-              Posted on 2nd sep 2024
+              Posted on {formatDate(blog.createdAt)}
             </div>
-            <div> {blog.content}</div>
+            <div
+              className="prose"
+              //this is ensuring that the content displayed in proper formate
+              dangerouslySetInnerHTML={{ __html: blog.content }}
+            ></div>
           </div>
           <div className="col-span-4 m-2 text-slate-600 text-lg pl-12">
             Author

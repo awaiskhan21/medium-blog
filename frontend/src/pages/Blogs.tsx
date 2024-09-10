@@ -6,6 +6,7 @@ import { useBlogs } from "../hooks";
 function Blogs() {
   const { loading, blogs } = useBlogs();
 
+  //skeleton
   if (loading) {
     return (
       <div>
@@ -46,9 +47,8 @@ function Blogs() {
   );
 }
 
-function formatDate(dateString: string) {
+export function formatDate(dateString: string) {
   const date = new Date(dateString);
-
   // Options for date formatting
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
