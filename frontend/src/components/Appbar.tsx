@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Avatar from "./Avatar";
+import { Button } from "./ui/button";
 
 function Appbar() {
   return (
@@ -10,12 +11,12 @@ function Appbar() {
         </div>
       </Link>
       <div className="flex">
-        <Link
-          to={"/publish"}
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 mr-4"
+        <Button
+          asChild
+          className="font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 mr-4"
         >
-          <button type="button">New</button>
-        </Link>
+          <Link to={"/publish"}>New</Link>
+        </Button>
         <Avatar name="Khan" size="big" />
       </div>
     </div>

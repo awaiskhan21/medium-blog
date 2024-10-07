@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Appbar from "../component/Appbar";
-import TextEditor from "../component/TextEditer";
+import Appbar from "../components/Appbar";
+import TextEditor from "../components/TextEditer";
 import { BACKEND_URL } from "../config";
 
 function Publish() {
@@ -35,7 +35,7 @@ function Publish() {
                 );
                 navigate(`/blog/${response.data.id}`);
               }}
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="text-white bg-black hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
             >
               Published
             </button>

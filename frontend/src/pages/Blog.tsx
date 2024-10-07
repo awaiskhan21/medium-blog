@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import Appbar from "../component/Appbar";
-import FullBlog from "../component/FullBlog";
+import Appbar from "../components/Appbar";
+import FullBlog from "../components/FullBlog";
 import { useBlog } from "../hooks";
 
 export default function BlogPage() {
