@@ -92,7 +92,7 @@ function Auth({ type }: { type: "signup" | "signin" }) {
               type="button"
               onClick={sendRequest}
               disabled={loading}
-              className={`w-full mt-8 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-bold rounded-lg text-lg px-5 py-2.5 me-2 mb-2 ${
+              className={`w-full mt-8 text-white !bg-slate-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-bold rounded-lg text-lg px-5 py-2.5 me-2 mb-2 ${
                 loading ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
